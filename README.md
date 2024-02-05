@@ -85,5 +85,3 @@ Order by 3 Desc
 Limit 5
 ```
 ![image](https://github.com/Zoya1506/Zoya1506/assets/159045446/1f94174b-0d69-4f11-8a4b-403b0d700988)
-
-
