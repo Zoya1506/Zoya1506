@@ -28,7 +28,7 @@ Limit 5
 ![image](https://github.com/Zoya1506/Zoya1506/assets/159045446/3c5d5865-637d-4c13-9941-2a60b822cfdb)
 
 5.Find out the average size of blocks of different months whose number is above 10000.
-```
+```SQL
 SELECT timestamp_month, AVG(size) AS `Average Size`
 FROM `bigquery-public-data.crypto_litecoin.blocks`
 Where number > 10000
@@ -63,5 +63,27 @@ GROUP BY 1
 ```
 ![image](https://github.com/Zoya1506/Zoya1506/assets/159045446/ff2b17b9-300a-4b49-91d5-b066f23ba8a4)
 
-9. 
+9. Find out the total output value of transactions and total weight of blocks belonging to same version lying between Jan and Dec 2023.
+```SQL
+SELECT t.version,sum(t.output_value)as `total output value`, SUM(b.weight) AS `total_weight`
+FROM `bigquery-public-data.crypto_litecoin.blocks` b
+LEFT JOIN `bigquery-public-data.crypto_litecoin.transactions` t
+on b.version = t.version
+WHERE timestamp_month BETWEEN '2023-01-01' AND '2023-12-31'
+Group by 1
+```
+![image](https://github.com/Zoya1506/Zoya1506/assets/159045446/ebced30d-d081-4cd4-b144-4e91832468d2)
+
+10. Find out top 5 blocks having the highest total weight and find its average output. 
+```SQL
+SELECT t.block_number, avg(t.output_value)as `Average output`, SUM(b.weight) AS `total_weight`
+FROM `bigquery-public-data.crypto_litecoin.blocks` b
+LEFT JOIN `bigquery-public-data.crypto_litecoin.transactions` t
+on b.number = t.block_number
+Group by 1
+Order by 3 Desc
+Limit 5
+```
+![image](https://github.com/Zoya1506/Zoya1506/assets/159045446/1f94174b-0d69-4f11-8a4b-403b0d700988)
+
 
